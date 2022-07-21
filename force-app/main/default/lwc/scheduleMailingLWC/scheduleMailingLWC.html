@@ -1,0 +1,25 @@
+<!-- sldsValidatorIgnore -->
+<template>
+    <article class="slds-card">
+        <div class="slds-card__body slds-card__body_inner">
+            <div class="slds-border_bottom">
+                <div class="slds-text-heading_medium"><b>Schedule Batch</b></div>
+                <div class="slds-text-heading_small">Schedule the mailing of happy birthday greetings to our clients.</div>
+                <lightning-input 
+                class = "slds-m-bottom_small" 
+                label = "CRON String" 
+                placeholder="Enter CRON expression..." 
+                value={message} 
+                required="true"
+                field-level-help="The CRON expression must be in a correct format"
+                disabled={buttonClicked}>  
+                </lightning-input>
+                <p><lightning-formatted-url value="https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_scheduler.htm" label="Read more about scheduling" target="_blank" ></lightning-formatted-url></p>
+            </div>
+            <div class="slds-clearfix">
+                <button class={cssClass} onclick={scheduleBatch}>{batchBtnLabel}</button>
+                <button class="slds-float_right slds-button slds-button_brand slds-m-around_xx-small" onclick={runOnce}>Run Once</button>
+            </div>
+        </div>
+    </article>
+</template>
