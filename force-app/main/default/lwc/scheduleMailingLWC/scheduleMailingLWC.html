@@ -9,10 +9,11 @@
                 class = "slds-m-bottom_small" 
                 label = "CRON String" 
                 placeholder="Enter CRON expression..." 
-                value={message} 
+                value={cronExp}
                 required="true"
                 field-level-help="The CRON expression must be in a correct format"
-                disabled={buttonClicked}>  
+                disabled={buttonClicked}
+                onchange={handleCronChange}>  
                 </lightning-input>
                 <p><lightning-formatted-url value="https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_scheduler.htm" label="Read more about scheduling" target="_blank" ></lightning-formatted-url></p>
             </div>
