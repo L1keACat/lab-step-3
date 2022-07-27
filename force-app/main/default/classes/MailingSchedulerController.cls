@@ -39,4 +39,24 @@ public with sharing class MailingSchedulerController {
             throw new AuraHandledException(e.getMessage());
         }
     }
+
+    @AuraEnabled(cacheable=true)
+    public static Map<String, Object> checkSchedulerStatus(String schedulerName) {
+        Map<String, Object> result = new Map<String, Object>(); 
+        try {
+            CronJobDetail job = [SELECT Id FROM CronJobDetail WHERE Name =: schedulerName];
+            CronTrigger cronTrigger = [SELECT Id, State, CronExpression FROM CronTrigger WHERE CronJobDetailId =: job.Id];
+            if (cronTrigger.State == 'WAITING' || cronTrigger.State == 'ACQUIRED' || cronTrigger.State == 'EXECUTING') {
+                result.put('status', true);
+                result.put('cronexp', cronTrigger.CronExpression);
+            }
+            return result;
+        } catch (System.QueryException e) {
+            result.put('status', false);
+            return result;
+        }
+        catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
+        }
+    }
 }

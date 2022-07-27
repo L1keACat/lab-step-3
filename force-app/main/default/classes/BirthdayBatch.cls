@@ -1,9 +1,11 @@
 public class BirthdayBatch implements Database.Batchable<sObject> {
+    
     public Database.QueryLocator start(Database.BatchableContext bc) {
         return Database.getQueryLocator(
             'SELECT ID, Name, Birthdate FROM Contact'
         );
     }
+
     public void execute(Database.BatchableContext bc, List<Contact> scope){
         List<Contact> contacts = new List<Contact>();
         for (Contact contact : scope) {
@@ -13,6 +15,7 @@ public class BirthdayBatch implements Database.Batchable<sObject> {
         }
         SendBirthdayEmail.sendEmail(contacts);
     }
+
     public void finish(Database.BatchableContext bc){
         AsyncApexJob job = [SELECT Id, Status, NumberOfErrors,
             JobItemsProcessed,

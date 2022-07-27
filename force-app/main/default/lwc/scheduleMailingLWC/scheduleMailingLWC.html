@@ -13,12 +13,13 @@
                 required="true"
                 field-level-help="The CRON expression must be in a correct format"
                 disabled={buttonClicked}
-                onchange={handleCronChange}>  
+                onchange={handleCronChange}
+                pattern="^((((\d+,)+\d+|(\d+(\/|-|#)\d+)|\d+L?|\*(\/\d+)?|L(-\d+)?|\?|[A-Z]{3}(-[A-Z]{3})?) ?){5,7})$">  
                 </lightning-input>
                 <p><lightning-formatted-url value="https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_scheduler.htm" label="Read more about scheduling" target="_blank" ></lightning-formatted-url></p>
             </div>
             <div class="slds-clearfix">
-                <button class={cssClass} onclick={scheduleBatch}>{batchBtnLabel}</button>
+                <button class={cssClass} onclick={toggleBatch}>{batchBtnLabel}</button>
                 <button class="slds-float_right slds-button slds-button_brand slds-m-around_xx-small" onclick={runOnce}>Run Once</button>
             </div>
         </div>
